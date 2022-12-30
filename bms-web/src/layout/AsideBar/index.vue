@@ -20,6 +20,10 @@
         </template>
         <el-menu-item index="/user">
           <el-icon><User /></el-icon>
+          <template #title>用户管理</template>
+        </el-menu-item>
+        <el-menu-item index="/role">
+          <el-icon><UserFilled /></el-icon>
           <template #title>角色管理</template>
         </el-menu-item>
          <el-menu-item index="/file">
@@ -33,7 +37,7 @@
 </template>
 
 <script setup>
-import { useRoute, useRouter } from 'vue-router'
+import { useRoute } from 'vue-router'
 const props = defineProps({
   isFold: {
     type: Boolean,
@@ -42,7 +46,6 @@ const props = defineProps({
 })
 
 const route = useRoute()
-const router = useRouter()
 </script>
 
 <style scoped lang="less">

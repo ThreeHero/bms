@@ -3,7 +3,7 @@ const option = {
     text: '季度会员统计图'
   },
   legend: {
-    left: 'center', 
+    left: 'right', 
     top: '0%'
   },
   series: [

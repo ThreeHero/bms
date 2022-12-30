@@ -29,12 +29,23 @@ const routes = [
         path: 'user',
         name: 'User',
         meta: {
-          title: '角色管理',
+          title: '用户管理',
           icon: 'User',
           isHidden: false,
           root: 'sys'
         },
         component: () => import('@/views/user')
+      },
+      {
+        path: 'role',
+        name: 'Role',
+        meta: {
+          title: '角色管理',
+          icon: 'UserFilled',
+          isHidden: false,
+          root: 'sys'
+        },
+        component: () => import('@/views/role')
       },
       {
         path: 'file',
