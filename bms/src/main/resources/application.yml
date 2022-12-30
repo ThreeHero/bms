@@ -1,0 +1,25 @@
+server:
+  port: 9000
+#  ip: localhost
+  ip: 192.168.1.4 # 局域网ip
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/bms
+    username: root
+    password: admin123
+  application:
+    name: bms
+
+mybatis-plus:
+  global-config:
+    db-config:
+      logic-delete-field: isDeleted
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+      id-type: auto # 自增策略
+
+files:
+  upload:
+    path: D:\code\project\bms\bms\src\main\resources\static\files\
