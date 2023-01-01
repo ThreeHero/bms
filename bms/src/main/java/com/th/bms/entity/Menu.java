@@ -12,6 +12,10 @@ public class Menu {
   private String name;
   private String path;
   private String description;
+  private String title;
+  private String component;
+
+  private Integer pid;
 
   @TableField(exist = false)
   private List<Menu> children;

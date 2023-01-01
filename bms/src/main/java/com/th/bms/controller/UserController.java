@@ -111,7 +111,7 @@ public class UserController {
   }
   // 删
   @DeleteMapping("/{id}")
-  public Result removeById(@PathVariable Long id) {
+  public Result removeById(@PathVariable Integer id) {
     userService.removeById(id);
     return Result.success("删除成功");
   }
@@ -127,7 +127,7 @@ public class UserController {
 
   // 查
   @GetMapping("/{id}")
-  public Result getById(@PathVariable Long id) {
+  public Result getById(@PathVariable Integer id) {
     LambdaQueryWrapper<User> queryWrapper = new LambdaQueryWrapper<>();
     queryWrapper.eq(User::getId, id);
     User user = userService.getOne(queryWrapper);

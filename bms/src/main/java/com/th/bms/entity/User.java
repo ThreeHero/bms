@@ -9,7 +9,7 @@ import lombok.Data;
 @Data
 public class User {
 
-  private Long id;
+  private Integer id;
   private String username;
   private String password;
   private String nickname;
@@ -19,8 +19,12 @@ public class User {
   @TableField("avatar_url")
   private String avatarUrl;
 
+  @TableField("role_id")
+  private Integer roleId;
+
   @TableField("create_time")
   private Date createTime;
+
 
   // 逻辑删除
   @TableLogic

@@ -57,7 +57,9 @@ public class RoleController {
     LambdaQueryWrapper<Role> queryWrapper = new LambdaQueryWrapper<>();
 
     queryWrapper.like(name != null, Role::getName, name);
-    queryWrapper.orderByDesc(Role::getId);
+    queryWrapper.orderByAsc(Role::getId);
+
+    roleService.page(pageInfo, queryWrapper);
 
     return Result.success("查询成功", pageInfo);
   }
