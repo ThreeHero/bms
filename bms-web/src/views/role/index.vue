@@ -68,6 +68,7 @@
       v-model="isShow"
       title="分配权限"
       width="30%"
+      destroy-on-close
     >
       <el-tree 
         :data="treeData" 
@@ -75,13 +76,11 @@
           label: 'title',
           children: 'children'
         }" 
-        show-checkbox
+        default-expand-all
       />
-
       <template #footer>
         <span>
-          <el-button @click="isShow = false">取消</el-button>
-          <el-button type="primary">确认</el-button>
+          <el-button @click="isShow = false">关闭</el-button>
         </span>
       </template>
     </el-dialog>
@@ -91,7 +90,7 @@
 <script setup>
 import { ref, reactive } from 'vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
-import { getAll } from '@/api/menu/menu.js'
+import { getAll, getMenuByRoleId } from '@/api/menu/menu.js'
 import { getRoleList, getRoleById, saveRole, updateRole, removeRole } from '@/api/role/role.js'
 import { Menu } from '@element-plus/icons-vue'
 import RolePagination from './components/RolePagination'
@@ -119,6 +118,7 @@ const rules = reactive({
   ]
 })
 const treeData = reactive([])
+const defaultCheckKey = reactive([])
 
 // 请求菜单列表
 const getMenuList = async () => {
@@ -237,9 +237,11 @@ const deleteRole = ({ id }) => {
 
 // 分配权限
 const assignPermissions = async ({ id }) => {
+ 
   isShow.value = true
-  // todo ...
 }
+
+
 
 </script>
 

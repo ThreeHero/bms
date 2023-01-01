@@ -22,7 +22,7 @@
               shape="square"
               :size="50"
             />
-            <el-icon v-else class="avatar-uploader-icon"><Plus /></el-icon>
+            <el-icon v-else><Plus /></el-icon>
           </el-upload>
         </el-descriptions-item>
         <el-descriptions-item label="昵称">
