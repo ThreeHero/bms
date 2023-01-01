@@ -8,28 +8,22 @@
       :collapse-transition="false"
       :collapse="isFold"
       router
+      v-for="menu in data" :key="menu.id"
     >
-      <el-menu-item index="/home">
-        <el-icon><House></House></el-icon>
-        <template #title>首页</template>
+      <el-menu-item :index="menu.path" v-if="!menu.pid && menu.path.charAt(0) === '/'">
+        <el-icon> <component :is="menu.icon"/> </el-icon>
+        <template #title>{{ menu.title }}</template>
       </el-menu-item>
-      <el-sub-menu index="sys">
+      <el-sub-menu :index="menu.path" v-else>
         <template #title>
-          <el-icon><Menu /></el-icon>
-          <span>系统管理</span>
+          <el-icon><component :is="menu.icon"/></el-icon>
+          <span>{{ menu.title }}</span>
         </template>
-        <el-menu-item index="/user">
-          <el-icon><User /></el-icon>
-          <template #title>用户管理</template>
+        <el-menu-item :index="item.path" v-for="item in menu.children">
+          <el-icon><component :is="item.icon"/></el-icon>
+          <template #title>{{ item.title }}</template>
         </el-menu-item>
-        <el-menu-item index="/role">
-          <el-icon><UserFilled /></el-icon>
-          <template #title>角色管理</template>
-        </el-menu-item>
-         <el-menu-item index="/file">
-          <el-icon><Document /></el-icon>
-          <template #title>文件管理</template>
-        </el-menu-item>
+        
       </el-sub-menu>
       
     </el-menu>
@@ -37,14 +31,27 @@
 </template>
 
 <script setup>
+import { reactive } from 'vue'
 import { useRoute } from 'vue-router'
+import { getMenuByRoleId } from '@/api/menu/menu.js'
+import { getCache } from '@/utils/storage'
+import useToTree from '@/hooks/useToTree'
+
 const props = defineProps({
   isFold: {
     type: Boolean,
     required: true
   }
 })
+const data = reactive([])
 
+// 请求菜单列表
+const getMenuList = async () => {
+  const res = await getMenuByRoleId(getCache('userInfo').roleId)
+  const result = useToTree(res)
+  result.forEach(item => data.push(item))
+}
+getMenuList()
 const route = useRoute()
 </script>
 

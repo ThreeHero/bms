@@ -40,9 +40,5 @@ onBeforeUnmount(() => {
 </script>
 
 <style scoped lang="less">
-.pagination {
-  display: flex;
-  justify-content: end;
-  margin-top: 20px;
-}
+
 </style>

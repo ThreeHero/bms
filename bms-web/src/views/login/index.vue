@@ -45,6 +45,10 @@ import { ElMessage } from 'element-plus'
 import { login } from '@/api/login/login.js'
 import { setCache } from '@/utils/storage'
 import useLoginStore from '@/stores/login/login.js'
+import { getMenuByRoleId } from '@/api/menu/menu.js'
+import { getRouter } from '@/router'
+
+
 
 const formRef = ref()
 const userInfo = reactive({
@@ -76,6 +80,10 @@ const loginHandle = () => {
         // 将token存入localStore和pinia
         setCache('token', res.token)
         loginStore.setToken(res.token)
+        // 将路由信息存储到localStore中
+        const data = await getMenuByRoleId(res.user.roleId)
+        setCache('router', data)
+        getRouter(data)
         // 路由跳转至首页
         router.replace('/')
       } else {

@@ -1,6 +1,7 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import useLoginStore from '@/stores/login/login'
 
+
 // 在这里时候pinia还没有被注册
 // const loginStore = useLoginStore()
 
@@ -14,51 +15,6 @@ const routes = [
     },
     component: () => import('@/layout'),
     children: [
-      {
-        path: 'home',
-        name: 'Home',
-        meta: {
-          title: '首页',
-          icon: 'House',
-          isHidden: false,
-          root: '/'
-        },
-        component: () => import('@/views/home')
-      },
-      {
-        path: 'user',
-        name: 'User',
-        meta: {
-          title: '用户管理',
-          icon: 'User',
-          isHidden: false,
-          root: 'sys'
-        },
-        component: () => import('@/views/user')
-      },
-      {
-        path: 'role',
-        name: 'Role',
-        meta: {
-          title: '角色管理',
-          icon: 'UserFilled',
-          isHidden: false,
-          root: 'sys'
-        },
-        component: () => import('@/views/role')
-      },
-      {
-        path: 'file',
-        name: 'File',
-        meta: {
-          title: '文件管理',
-          icon: 'Document',
-          isHidden: false,
-          root: 'sys'
-        },
-        component: () => import('@/views/FileManage')
-      },
-
       // 不在侧边栏
       {
         path: 'person',
@@ -97,6 +53,24 @@ const router = createRouter({
   history: createWebHashHistory(),
   routes
 })
+
+
+export const getRouter = (res) => {
+  res = res ?? []
+  for(const route of res) {
+    if (route?.component) {
+      router.addRoute('Main', {
+        path: route.path,
+        name: route.name,
+        meta: {
+          icon: route.icon,
+          title: route.title
+        },
+        component: () => import(`@/views/${route.component}`)
+      })
+    }
+  }
+}
 
 // 定义白名单, 不需要token的页面
 const whiteList = ['/login', '/404']

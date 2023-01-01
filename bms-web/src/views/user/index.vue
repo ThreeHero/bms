@@ -60,6 +60,7 @@
     <el-table-column type="index" align="center" />
     <el-table-column prop="username" label="用户名" />
     <el-table-column prop="nickname" label="昵称" />
+    <el-table-column prop="role" label="角色" />
     <el-table-column prop="email" label="邮箱" />
     <el-table-column prop="phone" label="手机" />
     <el-table-column prop="address" label="地址" />
@@ -151,6 +152,7 @@ const total = ref(0) // 用户总数
 const user = reactive({
   username: '',
   nickname: '',
+  role: '',
   address: '',
   email: '',
   phone: ''
@@ -159,6 +161,7 @@ const user = reactive({
 let userInfo = reactive({
   username: '',
   nickname: '',
+  role: '',
   address: '',
   email: '',
   phone: ''
@@ -214,8 +217,9 @@ const getPage = async (userInfo) => {
     while (userList.length) {
       userList.pop()
     }
-    
+    const roleArr = ['管理员', '会员用户', '普通用户']
     for (const user of res.records) {
+      user.role = roleArr[user.roleId - 1]
       userList.push(user)
     }
     total.value = res.total
@@ -354,10 +358,5 @@ const userImport = () => {
   display: flex;
 }
 
-// 分页
-.pagination {
-  display: flex;
-  justify-content: end;
-  margin-top: 20px;
-}
+
 </style>

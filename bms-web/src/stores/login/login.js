@@ -1,5 +1,7 @@
 import { defineStore } from 'pinia'
 import { getCache } from '@/utils/storage'
+import { getRouter } from '@/router'
+
 
 const useLoginStore = defineStore('login', {
   state() {
@@ -22,9 +24,12 @@ const useLoginStore = defineStore('login', {
     },
 
     // 加载本地数据
-    loadLocalDataAction() {
+    async loadLocalDataAction() {
       this.token = getCache('token')
       this.userInfo = getCache('userInfo')
+
+      getRouter(getCache('router')?? [])
+
     }
   }
 })

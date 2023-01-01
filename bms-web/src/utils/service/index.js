@@ -1,11 +1,10 @@
 import axios from 'axios'
-import useLoginStore from '@/stores/login/login'
+import { getCache } from '../storage'
 
 // const BASE_URL = 'http://127.0.0.1:9000'
 export const BASE_URL = 'http://192.168.1.4:9000'
 const TIME_OUT = 5000 // 5s后超时
 
-const loginStore = useLoginStore()
 
 const service = axios.create({
   baseURL: BASE_URL,
@@ -17,9 +16,9 @@ service.interceptors.request.use(config => {
   // 添加请求头
   config.headers['Content-Type'] = 'application/json;charset=utf-8'
 
-  if (loginStore.token) {
+  if (getCache('token')) {
     // 携带token
-    config.headers['Authorization'] = `Bearer ${loginStore.token}`
+    config.headers['Authorization'] = `Bearer ${getCache('token')}`
   }
   return config
 }, error => {
