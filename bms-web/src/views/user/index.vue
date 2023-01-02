@@ -64,7 +64,7 @@
     <el-table-column prop="email" label="邮箱" />
     <el-table-column prop="phone" label="手机" />
     <el-table-column prop="address" label="地址" />
-    <el-table-column label="操作" align="center">
+    <el-table-column label="操作" align="center" :width="260">
       <template #default="scope">
         <!-- 编辑按钮 -->
         <el-button type="primary" @click.prevent="editRow(scope.row)">

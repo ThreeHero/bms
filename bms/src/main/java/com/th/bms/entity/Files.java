@@ -15,7 +15,7 @@ public class Files {
   private String url;
   private String md5;
 
-  @TableLogic
-  private Boolean isDeleted;
+  // @TableLogic
+  // private Boolean isDeleted;
 
 }
